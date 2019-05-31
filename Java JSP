@@ -1,0 +1,184 @@
+자바 기초 프로그래밍 강좌 (Java Programming Tutorial) – 동빈나 2019.05.29 ~
+
+1.	Hello World!
+-	자바 언어 소개: 현재 사용되는 대부분의 시스템 개발의 기본이 되는 프로그래밍 언어. C++과 같이 대표적인 객체 지향 프로그래밍 언어. 
+-	자바를 설치하고 자바 개발을 도와주는 대표적인 개발 환경인 이클립스 ide 설치해보자
+-	첫 번째 프로젝트 만들어보기
+public class Main {
+	public static void main(String[] args) {
+		System.out.println("Hello world!");
+	}
+}
+	Hello world!
+“public static void main(String[] args) {“
+자동으로 메인함수를 만들어 줌. 하나의 프로젝트에서 제일 먼저 실행되는 함수
+2.	변수(variable)
+-	변수 VS 상수
+변수는 프로그램이 실행되는 동안에 언제든지 저장된 값이 변경될 수 있는 공간
+상수는 한번 정해지면 값을 변경할 필요가 없는 데이터 
+-	변수 설정
+정수는 int 변수 이름 = 값;
+실수는 double 변수 이름 = 값;
+문자형은 String 변수 이름 = “값”;
+public class Main {
+
+	public static void main(String[] args) {
+		int intType = 100;
+		double doubleType = 150.5;
+		String stringType = "이정화"; 		//변수 선언 및 값 설정하여 초기화
+		
+		System.out.println(intType); 
+		 //값 출력 후 한칸 줄바꿈
+		System.out.println(doubleType);
+		System.out.println(stringType);
+	}
+
+}
+
+-	상수 정의해보기
+public class Main {
+	final static double PI = 3.141592;
+	//  상수는 메인함수 바깥 쪽에 정의
+	
+	public static void main(String[] args) {
+		int r = 30;
+		System.out.println(r * r * PI);
+	}
+
+}
+-	Overflow 개념
+public class Main {
+	final static int INT_MAX = 2147483647; // int 최댓값
+	
+	public static void main(String[] args) {
+		int a = INT_MAX; 
+// 상수를 a라는 변수에 넣어줌
+		System.out.println(a + 1); 
+// -2147483647 이 나옴:int최솟값. int의 범위를 넘었기 때문에 오류로 최솟값이 나옴: 순환구조
+	}
+}
+-	사칙연산 프로그램 작성
+public class Main {
+	
+	public static void main(String[] args) {
+		int a = 1;
+		int b = 2;
+		
+		System.out.println("a + b = " + ( a + b));
+	}
+} 
+	a +b = 3   
+
+3.	자료형(Data Type)
+-	변수 쓰임에 대한 팁
+1)	자바에서는 변수 선언 후 값 대입(초기화)을 안 하면 사용 못 함
+2)	정수 타입에 byte, short, int, long
+각각 차지하는 메모리크기 (즉 표현가능 범위)가 다름
+Int는 4 byte, -21억 ~ 21억 정도까지. 값의 범위를 넘어갈 경우 long 쓰면 됨
+3)	정수 변수 안에 실수 넣으면 정수 부분만 저장됨 int a = (int) 0.5; -> 0
+4)	실 수 값 반올림하기: 변수에 0.5 더한 뒤에 정수형으로 형 변환
+ (int)(실수 + 0.5);
+Double b = 0.5;
+Int a = (int) ( b + 0.5); -> 1
+
+-	원시 자료형: 자바에서 기본적으로 사용이 되는 자료형. Boolean, char, byte, short, int, long..
+-	비원시 자료형: 다른 자료형들을 엮어서 만든 것. String, array 등.. 
+-	아스키코드 기반의 char형을 사용해 a부터 z까지 출력해보기 (반복문 사용)
+public class Main {
+
+	public static void main(String[] args) {
+		for (char i = 'a'; i <= 'z' ; i++) {
+			System.out.print(i + " "); 
+		}
+	}
+
+} 
+-	10진수를 8진수 혹은 16진수로 바꿔보기
+public class Main {
+
+	public static void main(String[] args) {
+	
+		int a = 200;
+		System.out.println("10진수 : " + a);
+		System.out.format("8진수 : %o\n", a); // 콤마 뒤에 값을 쓰면 a가 % 뒷 자리에 들어감		System.out.format("16진수 : %x\n", a); // \n으로 줄 바꿈
+	}
+
+}
+-	Substring  함수 써보기
+public class Main {
+
+	public static void main(String[] args) {
+	
+		 String name = "John Doe";
+		 System.out.println(name);
+		 System.out.println(name.substring(0, 1)); // 0부터 시작해서 마지막 자리 숫자까지
+		 System.out.println(name.substring(3, 6)); // 3번째 숫자부터 6번째 자리까지 -> n D
+	}
+}
+-	String은 클래스 기반의 비원시 자료형:substring가 같은 내부적인 함수가 존재하기 때문
+-	정수를 나타내는 자료형이 많은 이유는 각 자료형이 차지하는 메모리 공간의 크기가 다르기 때문
+-	자바에서 string은 내부적으로 char의 배열
+-	
+
+4.	연산자(operator)
+-	가장 많이 사용되는 연산자는 +, -, *, /(몫만), %(modular, 나머지 값)
+-	초를 입력 받아 몇 분 몇 초인지 계산하는 프로그램 작성해보기
+
+public class Main {
+	
+	final static int SECOND = 1000;
+	
+	public static void main(String[] args) {
+		
+		int minute = SECOND / 60; 
+		int second = SECOND % 60; // 나머지값
+		
+		System.out.println(minute + "분" + second + "초");
+	}
+
+} -> 16분 40초
+-	++와 - -연산의 개념을 바르게 이해하고 프로그램을 작성해보자 (증감 연산자의 활용)
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		int a = 10;
+		System.out.println("현재의 a는 " + a + "입니다.");
+		a++;
+		System.out.println("현재의 a는 " + a + "입니다."); // a는 11
+		System.out.println("현재의 a는 " + ++a + "입니다."); 
+		// a는 12 (a에 먼저 1을 더해준 후 출력)
+		System.out.println("현재의 a는 " + a++ + "입니다."); 
+		// a는 12 (출력이 된 이후에 빠져나가면서  a에 1을 더해줌)
+		System.out.println("현재의 a는 " + a + "입니다."); //  a는 13
+	}
+}
+-	%(모듈러)연산자의 사용법 배워보기
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		System.out.println(1 % 3); // -> 1 나눈 후 나머지값 반환
+		System.out.println(2 % 3); // -> 2
+		System.out.println(3 % 3); // -> 0
+	}
+}
+-	==, >, <, &&(and), ||(or), ! 연산
+-	‘조건? 참:거짓’ (삼항 연산자) 연산의 형태를 숙지: (조건식)? 참일 때 값 : 거짓일 때 값
+public class Main {
+	
+	public static void main(String[] args) {
+		int x = 50;
+		int y = 60;
+		
+		System.out.println("최댓값은 " + max(x,y) + "입니다.");
+	}
+	//함수 형태: 반환형, 함수이름(매개 변수)
+	static int max(int a, int b) { // 매개변수 a와 b 중 더 큰 값을 리턴
+		int result = ( a > b) ? a : b; // 참값이면  a가 결과값에 들어감, 거짓이면 b가 들어감
+		return result;
+		
+	}
+} 
+	최댓값은 60입니다.
