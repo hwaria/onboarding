@@ -1,0 +1,25 @@
+package homework;
+
+public class main {
+
+	public static void main(String[] args) {
+		for(int i = 1; i <= 50; i++) {
+			String nums = Integer.toString(i);
+			int howMany = 0;			
+			if (nums.contains("3") || nums.contains("6") || nums.contains("9")) {			
+				for (int j = 0; j < nums.length(); j++) {
+					char ch = nums.charAt(j);
+					if ((ch == '3') || (ch == '6') || (ch == '9')) {
+						howMany++;
+						if (howMany == 1) {
+							System.out.println("짝");
+						} else if (howMany ==2) {
+							System.out.println("짝짝");
+						}				
+					} 
+				}
+			} else {
+				System.out.println(i);
+			}	
+		}
+	}}
