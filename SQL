@@ -117,4 +117,223 @@ Select * from sampe24 where not (a<>0 or b<>0);
 -	전방 일치 ‘검색어%’, 중간 일치 ‘%검색어%’, 후방 일치 ‘%검색어’
 -	이스케이프( \ ): %나 _를 포함한 문자열 검색할 때
 SELECT * FROM SAMPLE25 WHERE TEXT LIKE ‘%\%%’;
-‘를 포함한 문자열검색할 때는 ‘를 두 개 연속 기술
+‘를 포함한 문자열 검색할 때는 ‘를 두 개 연속 기술
+
+9강. 정렬 – order by
+-	Order by구를 지정하지 않을 경우 데이터베이스 내부에 저장된 순서로 반환
+1.	Order by로 검색 결과 정렬하기 
+-	SELECT 열명 FROM 테이블명 WHERE 조건식 ORDER BY 열명
+-	SELECT * FROM TABLE31 ORDER BY AGE/ADDRESS..
++------+------+-------------------+
+| name | age  | address           |
++------+------+-------------------+
+| A씨  |   36 | 대구광역시 중구   |
+| B씨  |   18 | 부산광역시 연제구 |
+| C씨  |   25 | 서울특별시 중구   |
+2.	ORDER BY DESC로 내림차순 정렬
+-	내림차순은 열명 뒤에 DESC를 붙여 지정
+-	SELECT * FROM SAMPLE31 ORDER BY ADDRESS DESC; (DESCENDING)
++------+------+-------------------+
+| name | age  | address           |
++------+------+-------------------+
+| C씨  |   25 | 서울특별시 중구   |
+| B씨  |   18 | 부산광역시 연제구 |
+| A씨  |   36 | 대구광역시 중구   |
++------+------+-------------------+
+
+-	오름차순은 생략 가능하거나 “ASC” 붙여 줌 (ASCENDING)
+3.	대소관계
+-	날짜시간형 데이터의 대소관계는 최근일수록 큼
+1999 < … < 2013 < 2019..
+-	문자형의 대소관계는 알파벳, 한글 자음순
+-	주의할 것
+문자열형 열에 숫자 데이터를 저장했을 경우 정렬을 했을 때 사전식 순서로 비교를 하게 됨에따라 1 – 10 – 11 – 2 의 순서로 정렬될 수 있음
+: 문자는 사전식 순서로 정렬, 숫자는 수치의 대소관계로 정렬
+4.	Order by는 테이블에 영향을 주지 않음
+-	서버에서 클라이언트로 행 순서를 바꾸어 결과를 반환하는 것뿐 저장장치에 저장된 데이터의 행 순서를 변경하지는 않음
+-	Select 명령은 데이터를 검색하는 명령으로, 테이블의 데이터를 참조만 할 뿐 변경은 하지 않음
+
+10강. 복수의 열을 지정해 정렬하기
+1.	복수 열로 정렬 지정
+-	Select * from sample32 order by a, b;
++------+------+
+| a    | b    |
++------+------+
+|    1 |    1 |
+|    1 |    2 |
+|    1 |    3 |
+|    2 |    1 |
+|    2 |    2 |
++------+------+
+2.	정렬 방법 지정하기
+-	Select * from sample32 order by a asc, b desc;
+	A 열은 오름차순으로, b열은 내림차순으로 정렬
+3.	NULL 값의 정렬 순서
+-	비교를 할 수 있는 값이 없으므로 null값을 가지는 행은 가장 먼저 표시되거나 가장 나중에 표시됨: mysql에서 null값을 가장 작은 값으로 취급함.오름차순에서는 null행 가장 먼저, 내림차순에서는 가장 나중에 표시
+
+11강. 결과 행 제한하기 – Limit
+-	Select 명령은 결과값으로 반환되는 행을 제한
+-	Limit 명령은 결과 행을 제한: 표시할 건(행) 수를 제한
+1.	행수 제한
+-	Limit 구는 표준 sql은 아님: mysql, PostgreSQL에서 사용 가능
+-	select * from sample33 limit 3;
+	총 7개의 행이 있는 자료에서 3행까지만 나옴
+-	정렬한 후 제한하기
+Select * from sample33 order by no desc limit3;
++------+
+| no   |
++------+
+|    7 |
+|    6 |
+|    5 |
++------+
+-	Limit을 사용할 수 없는 데이터베이스에서의 행 제한
+Sql server에서는 ‘top’ 사용. 
+Select top 3 * from sample33;
+oracle에서는 ‘rownum’ 사용
+select * from sample33 where rownum <=3;
+2.	오프셋 지정
+-	페이지 나누기처럼 데이터를 나눠서 구현하는 것
+-	select * from sample33 limit 3 offset 4(시작할 행 -1);
++------+
+| no   |
++------+
+|    5 |
+|    6 |
+|    7 |
++------+
+
+12강. 수치 연산
+1.	사칙 연산
+-	+, -, *, /, %(mod)
+-	연산자의 우선순위 고려
+2.	Select 구로 연산하기
+-	Select 구에서 열명 외에도 연산자, 상수를 이용하여 식 기술 가능 
+Select *, price * quantity from sample34;
++------+-------+----------+------------------+
+| no   | price | quantity | price * quantity |
++------+-------+----------+------------------+
+|    1 |   100 |       10 |             1000 |
+|    2 |   230 |       24 |             5520 |
+|    3 |  1980 |        1 |             1980 |
++------+-------+----------+------------------+
+
+3.	열의 별명 
+-	위의 예에서 price * quantity 콜럼의 이름을 변경해서 알아보기 쉽게 하기
+Select *, price * quantity as amount from sample34;
+-	Select 구에서는 콤마로 구분해서 복수의 식 지정 가능하며 각각 별명을 붙일 수 있음
+-	키워드 (as)는 생략 가능: select price * quantity amount라고 써도 무방
+-	한글로 지정할 경우에는 오작동하는 경우가 많으므로 쌍따옴표로 둘러싸서 지정
+-	쌍따옴표로 둘러싸면 명령구문 분석시 데이터베이스 객체의 이름이라 간주하고, 따옴표로 둘러싸면 문자열 상수로 봄.
+4.	Where 구에서 연산하기
+-	select *, price * quantity as amount from sample34 where price * quantity >= 2000;
+-	이때, where구에서는 select구에서 지정해준 별명을 사용할 수 없다: 데이터베이스에서 주로 where구 처리를 먼저 하고 select 구를 처리하기 때문 
+5.	NULL 값의 연산
+-	C나 php 언어에서는 null 값을 0으로 처리하여 ‘null + 1’ 의 경우 결과값으로 1이 반환되지만, sql에서는 null 값을 이용한 연산결과는 무조건 null.’
+6.	Order by 구에서 연산하기 
+-	Order by 구에서 연산하여 결과에 따라 바로 정렬
+-	Select *, price * quantity as amount from sample34 order by price * quantity desc;
+-	Order by는 서버에서 내부적으로 가장 나중에 처리되므로 select 구에서 지정한 별명 사용 가능 
+7.	함수 
+-	함수명(인수 1, 인수 2…)
+-	MOD함수의 예: MOD(10, 3) -> 1
+
+8.	Round 함수 
+-	소수점 이하를 반올림
+select *, round(amount) from sample341;
+-	반올림 자릿수 지정 
+Select amount, round(amount, 1) from sample341;
+	Round 함수의 두 번째 인수를 지정해 소수점 둘째 자리를 반올림하여 소수점 첫 자리까지 나옴
+
+-1을 지정하면 1단위, -2를 지정하면 10단위 반올림 가능. 버림은 TRUNCATE
+select *, truncate(amount, -2) from sample341;
+	십자리 이하 버림. 5900, 2100…
+
+13강. 문자열 연산
+1.	문자열 결합
+-	SQL Server 에서는 “+”
+-	Oracle, DB2, PostgreSQL에서는 “||”
+-	MySQL에서는 “CONCAT”
+-	CONCAT으로 수치형 + 문자열도 가능
+select concat(quantity, unit) from sample35;
+	10개, 200통,..
+
+2.	Substring 함수 
+-	SUBSTRING(‘20140125001’, 1, 4) -> ‘2014’
+-	SUBSTRING(‘20130123001’, 5, 2) -> ‘01’
+select substring('20190604', 1,4) as yyyy, substring('20190604', 5, 2) as mm, substring('20190604', 7, 2) as dd FROM DUAL;
+
+**dual
+DUAL이라는 테이블은 SYS 사용자가 소유하는 오라클의 표준 테이블로서 오직 한 행(row)에 한 컬럼만 담고 있는 dummy 테이블로서 일시적인 산술연산이나 날짜 연산을 위하여 주로 쓰인다. 
+
+3.	Trim 함수 
+-	문자열의 앞뒤로 여분의 스페이스 있을 경우 제거 
+select trim('여름인가요?   ') from dual;
+	‘여름인가요?’
+
+4.	Character_length 함수
+-	select character_length('여름인가요?   ') from dual; -> 9
+
+14강. 날짜 연산
+1. SQL에서의 날짜
+- 시스템 날짜 ‘CURRENT_TIMESTAMP’ (인수 필요없음)
+Mysql: SELECT CURRENT_TIMESTAMP; 
+Oracle: SELECT SYSDATE FROM DUAL;
+-> 2019-06-04 10:36:12
+- 날짜 서식 
+Oracle에서 문자열 데이터를 날짜형 데이터로 변환하기 To_date(‘2014/01/25’, ‘YYYY/MM/DD’)
+*날짜형 데이터를 문자열 데이터로 출력할 때는 to_char
+- 날짜 포맷 변경(mysql(
+YYYY-MM-DD
+SELECT DATE_FORMAT(NOW(), ‘%Y-%M-%D’) FROM DUAL -> 2018-04-04 
+
+YYYYMMDD
+SELECT DATE_FORMAT(NOW(), ‘%Y%M%D’) FROM DUAL -> 20180404
+
+YY-MM-DD
+SELECT DATE_FORMAT(NOW(), ‘%y-%m-%d’) FROM DUAL -> 18-04-04
+
+
+
+2. 날짜의 덧셈과 뺄셈 
+- select current_date + interval 1 day; -> 2019-06-05
+- select DATE_FORMAT(current_date() + interval 1 month, '%Y-%m-%d') FROM DUAL; -> 한달 뒤 날짜 YYYY-MM-DD 형태로 출력
+- 날짜형 간의 뺄셈
+1) MYSQL
+SELECT DATEDIFF('2014-02-28', '2014-09-05');
+2) ORACLE
+ORACLE: SELECT TO_DATE('2019-06-04', 'yyyy-mm-dd')+1 - TO_DATE('2019-05-03', 'yyyy-mm-dd') FROM DUAL;
+
+15강. CASE 문으로 데이터 반환하기
+1.	case 문 
+-	CASE WHEN 조건식1 THEN 식1
+[WHEN 조건식2 THEN 식2..]
+[ELSE 식3]
+END
+select name, birthday, case when birthday is null then "생일을 입력해주세요" else birthday end "birthday2" from sample21;
++--------+------------+---------------------+
+| name   | birthday   | birthday2           |
++--------+------------+---------------------+
+| 박준용 | 1976-10-18 | 1976-10-18          |
+| 김재진 | NULL       | 생일을 입력해주세요 |
+| 홍길동 | NULL       | 생일을 입력해주세요 |
+| 이김박 | NULL       | 생일을 입력해주세요 |
++--------+------------+---------------------+
+
+-	COALESCE: NULL 값 변환 시 사용하면 더 쉬움
+select birthday, coalesce(birthday, "0000-00-00") from sample21;
+
+2.	또 하나의 case 문 
+-	숫자로 이루어진 코드를 알아보기 쉽게 문자열로 변환: ‘디코드’
+-	문자를 수치화: ‘인코드’
+-	검색 CASE는 CASE WHEN 조건식 THEN 식..
+-	단순 CASE는 CASE 식 WHEN 식 THEN 식..
+SELECT a as "code", 
+case 
+when a =1 then '남자'
+when a =2 then "여자" 
+else '미지정' 
+end as "성별" FROM SAMPLE37;
+
+3.	Case를 사용할 경우 주의사항
+-	Else를 생략하면 null이 반환되므로 지정하는 것이 좋음
