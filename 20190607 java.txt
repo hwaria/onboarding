@@ -1,12 +1,12 @@
-1. set °ú ListÀÇ Â÷ÀÌ? (Áßº¹, ¼ø¼­º¸Àå ¿¡ ´ëÇÑ ³»¿ëÀÌ µé¾î°¥°Í)
-list´Â ÀÔ·ÂµÇ´Â ¸ğµç °ªÀ» ÀúÀåÇÒ ¼ö ÀÖ´Â ¹İ¸é¿¡ setÀº Áßº¹µÇÁö ¾Ê´Â °íÀ¯ÇÑ °ªµéÀ» ´ãÀ» ¶§ »ç¿ëÇÏ¸ç, 
-setÀ» ÅëÇØ µ¥ÀÌÅÍ°¡ ¼øÂ÷ÀûÀ¸·Î µé¾î°¡Áö ¾ÊÀ¸¹Ç·Î ÀÎµ¦½º¸¦ »ç¿ëÇÏ¿© µ¥ÀÌÅÍ¿¡ Á¢±ÙÇÒ ¼ö ¾ø´Ù.
+1. set ê³¼ Listì˜ ì°¨ì´? (ì¤‘ë³µ, ìˆœì„œë³´ì¥ ì— ëŒ€í•œ ë‚´ìš©ì´ ë“¤ì–´ê°ˆê²ƒ)
+listëŠ” ì…ë ¥ë˜ëŠ” ëª¨ë“  ê°’ì„ ì €ì¥í•  ìˆ˜ ìˆëŠ” ë°˜ë©´ì— setì€ ì¤‘ë³µë˜ì§€ ì•ŠëŠ” ê³ ìœ í•œ ê°’ë“¤ì„ ë‹´ì„ ë•Œ ì‚¬ìš©í•˜ë©°, 
+setì„ í†µí•´ ë°ì´í„°ê°€ ìˆœì°¨ì ìœ¼ë¡œ ë“¤ì–´ê°€ì§€ ì•Šìœ¼ë¯€ë¡œ ì¸ë±ìŠ¤ë¥¼ ì‚¬ìš©í•˜ì—¬ ë°ì´í„°ì— ì ‘ê·¼í•  ìˆ˜ ì—†ë‹¤.
 
-2. list ¿Í arrayListÀÇ Â÷ÀÌ, map ÀÌ¶û Hashmap ÀÇ Â÷ÀÌ?
-List´Â ÀÎÅÍÆäÀÌ½ºÀÌ°í arrayList´Â List¿¡ ¼ÓÇØÀÖ´Â Å¬·¡½º·Î list ÀÎÅÍÆäÀÌ½º¸¦ ±¸ÇöÇÏ°í ÀÖÀ½ 
-MapÀº ÄÃ·º¼ÇÁî ÇÁ·¹ÀÓ¿öÅ© ¾È¿¡ ÀÖ´Â ÃÖ»óÀ§ Ä«Å×°í¸® Áß ÇÏ³ª. 
+2. list ì™€ arrayListì˜ ì°¨ì´, map ì´ë‘ Hashmap ì˜ ì°¨ì´?
+ListëŠ” ì¸í„°í˜ì´ìŠ¤ì´ê³  arrayListëŠ” Listì— ì†í•´ìˆëŠ” í´ë˜ìŠ¤ë¡œ list ì¸í„°í˜ì´ìŠ¤ë¥¼ êµ¬í˜„í•˜ê³  ìˆìŒ 
+Mapì€ ì»¬ë ‰ì…˜ì¦ˆ í”„ë ˆì„ì›Œí¬ ì•ˆì— ìˆëŠ” ìµœìƒìœ„ ì¹´í…Œê³ ë¦¬ ì¤‘ í•˜ë‚˜. 
 
-3. 1~100±îÁö¸¦ ÄÃ·º¼ÇÀ» ÀÌ¿ëÇÏ¿© Ãâ·ÂÇÏ½Ã¿À
+3. 1~100ê¹Œì§€ë¥¼ ì»¬ë ‰ì…˜ì„ ì´ìš©í•˜ì—¬ ì¶œë ¥í•˜ì‹œì˜¤
 public class Main {
 	
 	public static void main(String[] args) {
@@ -22,17 +22,17 @@ public class Main {
 	}
 }
 
-4. ¿ì¸® ÆÀ¿øµé ÀÌ¸§¿¡ °¢°¢ ÀÎµ¦½º(¼ıÀÚ 1,22,33,44 ...) ¸¦ ºÎ¿©ÇÏ°í ¼ø¼­´ë·Î Á¤·ÄÇÏ¿© Ãâ·ÂÇØº¸½Ã¿À.
-4.1 treeMap »ç¿ë
+4. ìš°ë¦¬ íŒ€ì›ë“¤ ì´ë¦„ì— ê°ê° ì¸ë±ìŠ¤(ìˆ«ì 1,22,33,44 ...) ë¥¼ ë¶€ì—¬í•˜ê³  ìˆœì„œëŒ€ë¡œ ì •ë ¬í•˜ì—¬ ì¶œë ¥í•´ë³´ì‹œì˜¤.
+4.1 treeMap ì‚¬ìš©
 public class Main {
 	
 	public static void main(String[] args) {
 		HashMap<Integer, String> a = new HashMap<Integer, String>();
 		
-		a.put(1, "¹®½ÂÁø");
-		a.put(22, "ÀÌÃ¢ÁØ");
-		a.put(33, "º¯ÀÚ·æ");
-		a.put(44, "ÀÌÁ¤È­");
+		a.put(1, "ë¬¸ìŠ¹ì§„");
+		a.put(22, "ì´ì°½ì¤€");
+		a.put(33, "ë³€ìë£¡");
+		a.put(44, "ì´ì •í™”");
 		
 		TreeMap<Integer, String> aa = new TreeMap<Integer, String> (a);
 		Set<Integer> keyset = a.keySet();
@@ -57,7 +57,7 @@ public class Main {
 	public static void sortbykey() {
 		ArrayList<Integer> ranks = new ArrayList<Integer> (a.keySet());
 		
-		Collections.sort(ranks);  //¿ª¼øÀº reverse()
+		Collections.sort(ranks);  //ì—­ìˆœì€ reverse()
 		
 		for (Integer i : ranks) {
 			System.out.println( i + " : " + a.get(i));
@@ -67,16 +67,54 @@ public class Main {
 	public static void main(String[] args) {
 		
 		
-		a.put(1, "¹®½ÂÁø");
-		a.put(22, "ÀÌÃ¢ÁØ");
-		a.put(33, "º¯ÀÚ·æ");
-		a.put(44, "ÀÌÁ¤È­");
+		a.put(1, "ë¬¸ìŠ¹ì§„");
+		a.put(22, "ì´ì°½ì¤€");
+		a.put(33, "ë³€ìë£¡");
+		a.put(44, "ì´ì •í™”");
 		
 		sortbykey();
 	}
 }
 
-5. 4¹ø ¹®Á¦¿¡¼­ 3¹øÂ°¿¡ ÇØ´çÇÏ´Â »ç¶÷ÀÇ ÀÌ¸§Àº ¹«¾ùÀÎÁö Ãâ·ÂÇØ º¸½Ã¿À.
-6. 4¹ø ¹®Á¦¿¡¼­ ¼ıÀÚ ¿ª¼øÀ¸·Î(³»¸²Â÷¼ø) Á¤·ÄÇØ¼­ Ãâ·ÂÇØº¸½Ã¿À
-7. 4¹ø ¹®Á¦¿¡¼­ ¼ıÀÚ°¡ ¾Æ´Ï¶ó ÀÌ¸§¼øÀ¸·Î Á¤·ÄÇØº¸½Ã¿À. (°¡³ª´Ù ¼ø)
-8. 4¹ø ¹®Á¦¿¡¼­ ÀÌ¸§ ¿ª¼øÀ¸·Î(³»¸²Â÷¼ø) Á¤·ÄÇØº¸½Ã¿À. (°¡³ª´Ù ¿ª¼ø)
+5. 4ë²ˆ ë¬¸ì œì—ì„œ 3ë²ˆì§¸ì— í•´ë‹¹í•˜ëŠ” ì‚¬ëŒì˜ ì´ë¦„ì€ ë¬´ì—‡ì¸ì§€ ì¶œë ¥í•´ ë³´ì‹œì˜¤.
+6. 4ë²ˆ ë¬¸ì œì—ì„œ ìˆ«ì ì—­ìˆœìœ¼ë¡œ(ë‚´ë¦¼ì°¨ìˆœ) ì •ë ¬í•´ì„œ ì¶œë ¥í•´ë³´ì‹œì˜¤
+7. 4ë²ˆ ë¬¸ì œì—ì„œ ìˆ«ìê°€ ì•„ë‹ˆë¼ ì´ë¦„ìˆœìœ¼ë¡œ ì •ë ¬í•´ë³´ì‹œì˜¤. (ê°€ë‚˜ë‹¤ ìˆœ)
+import java.util.*;
+
+public class Main {
+	
+	
+	public static void main(String[] args) {
+		Map<Integer, String> a = new HashMap<>();	
+		a.put(1, "ë¬¸ìŠ¹ì§„");
+		a.put(22, "ì´ì°½ì¤€");
+		a.put(33, "ë³€ìë£¡");
+		a.put(44, "ì´ì •í™”");
+		a.put(100, "ê¹€ì§„ì„");
+		
+		Iterator it = sortbyvalue(a).iterator();
+		 
+		while (it.hasNext()) {
+			Integer temp = (Integer) it.next();
+			System.out.println(temp + " : " + a.get(temp));
+		}
+	}
+
+
+public static List sortbyvalue(final Map a) {
+	
+	List<String> ranksName = new ArrayList();
+	ranksName.addAll(a.keySet());
+	
+	Collections.sort(ranksName, new Comparator() {
+		public string compare(Object o1, Object o2) {
+			Object v1 = a.get(o1);
+			Object v2 = a.get(o2);
+			
+			return ((Comparable) v2).compareTo(v1);
+		}
+	});
+	return ranksName;
+}
+} // ì•„ì§ ì•ˆë¨..
+8. 4ë²ˆ ë¬¸ì œì—ì„œ ì´ë¦„ ì—­ìˆœìœ¼ë¡œ(ë‚´ë¦¼ì°¨ìˆœ) ì •ë ¬í•´ë³´ì‹œì˜¤. (ê°€ë‚˜ë‹¤ ì—­ìˆœ)
