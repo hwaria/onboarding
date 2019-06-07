@@ -1,0 +1,54 @@
+﻿1. sample51 테이블의 전체 행(레코드) 수 출력
+select count(*) from sample51;
+
+2. sample34 전체 price 열(컬럼)의 평균 출력
+select sum(price) from sample34;
+ 
+
+3. sample34 전체 price 열(컬럼)의 총 합 출력
+select avg(price) from sample34;
+ 
+
+4. sample34 전체 price가 가장 높은 행(레코드) 출력
+select max(price) from sample34;
+
+5. sample34 전체 price가 가장 낮은 행(레코드) 출력
+select min(price) from sample34;
+
+6. sample51 중복을 제외한 name의 count 출력
+select distinct name from sample51;
+
+7. sample51 테이블에서 name이 같은 로우끼리 그룹을 만들고 그룹별 quantity 의 합 출력
+select name, sum(quantity) from sample51 group by name;
+
+8. sample51 테이블에서 name이 같은 로우끼리 그룹을 만들고 그룹별 행(레코드) 수 출력
+select name, count(*) from sample51 group by name;
+
+9. sample51 테이블에서 name이 같은 로우끼리 그룹을 만들고 그룹별 행(레코드) 수가 2 이상인 행(레코드) 만 출력
+select name, count(*) from sample51 group by name having count(name) >=2;
+
+10. sample51 테이블에서 name이 같은 로우끼리 그룹을 만들고 그룹별 행(레코드) 수가 1인 행(레코드) 만 출력
+select name, count(*) from sample51 group by name having count(name) = 1;
+
+11. sample51 테이블에서 name열로 그룹화해 합계를 구하고 내림차순으로 정렬
+select name, sum(quantity) from sample51 group by name order by sum(quantity) desc;
+
+12. sample34 에서 price 가장 낮은 행(레코드) 의  no, price, quantity 컬럼 출력
+select no, price, quantity from sample34 where price = (select min(price) from sample34);
+
+13. sample552 테이블에 있는 no2 값만 sample551 테이블에서 조회 ( in절 과 sub쿼리 사용)
+select * from sample551 where no in (select no2 from sample552);
+
+14.207p~213p 예제 실습 (예제 5-26은 굉장히 많이씀)
+
+15. 32강 테이블결합 학습 ( 엄청 중요~ 계속 읽고 따라해보기)
+
+
+
+
+
+
+
+
+
+

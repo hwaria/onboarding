@@ -1,0 +1,83 @@
+﻿1. 테이블 sample32을 a열을 오름차순, b열을 내림차순 으로 정렬
+select * from sample32 order by a asc, b desc;
+2. 테이블 sample32을 b열을 내림차순, a열을 오름차순 으로 정렬
+select * from sample32 order by b desc, a asc;
+
+3. null 값에 대해서 어떻게 정렬이 되는지 확인
+오름차순에서는 가장 먼저, 내림차순에서는 가장 나중에 정렬.
+4. 테이블 sample33의 no 컬럼을 내림차순으로 정렬
+select * from sample33 order by no desc;
+
+5. 테이블 sample33의 no 컬럼 값을 기준으로 상위 5건만 조회 
+select * from sample33 order by no limit 5;
+
+6. limit 함수는 표준sql 이 아니라 oracle 에서는 사용 못함. 그렇다면 oracle에서는 어떻게 5번을 해결할 수 있는지 확인
+select * from sample33 order by no where rownum <= 5 ;
+
+7. sample33의 데이터를 내림차순으로 한 페이지에 3건씩 출력하려고 한다. 각 페이지에 대한 쿼리
+  1페이지 select * from sample33 order by no desc limit 3 offset 0;
+  2페이지 select * from sample33 order by no desc limit 3 offset 3;
+  3페이지 select * from sample33 order by no desc limit 3 offset 6;
+  
+8. sample34의 price 와 quantity 를 곱해 amount 를 출력
+select *, price * quantity as amount from sample34; (oracle에서는 'AS' 안 씀)
+
+9. sample34에서 price 와 quantity 를 곱한 값이 2000 이상 인 행(레코드) 조회
+select *, price * quantity as amount from sample34 where price * quantity >= 2000;
+
+10. sample34에서 price 와 quantity 를 곱한 값이 2000 이하 인 행(레코드) 조회
+select *, price * quantity as amount from sample34 where price * quantity <= 2000;
+
+11. sample34에서 price 와 quantity 를 곱한 값이 큰 순서대로 정렬
+select *, price * quantity as amount from sample34 order by amount desc;
+
+12. null 에 대한 사칙연산 확인 (null +2 ,  null *2 등등)
+sql에서 null값은 아무값도 가지지 않으므로 null값을 이용한 사칙연산의 결과는 모두 'null'
+
+13. sample34의 price 와 quantity 를 곱해 amount 를 출력 하고 amount 내림차순으로 정렬
+select *, price * quantity as amount from sample34 order by amount desc;
+
+14. sample341 의 amount 데이터를 소수 두번째 자리에서 반올림 ,소수 첫번째 자리에서 반올림 한 값 , 일의 자리수에서 반올림 한 값 , 십의 자리수에서 반올림 한 값 을 출력 
+select round(amount,1), round(amount), round(amount, -1), round(amount, -2) from sample341;
+
+15. sample34의 no가 1,2 인 로우의 price의 합을 구하라 (sum함수사용)
+select sum(price) from sample34 where no = 1 || no = 2;
+
+16. sample35의 quantity 컬럼과 unit 컬럼을 연결해 결과 얻기(concat사용) 
+select concat(quantity, unit) from sample35;
+
+17. oracle에서는 concat을 사용 할 수 없다. oracle에서는 16번을 어떻게 해결 할 수 있는지 확인
+select quantity|| unit from sample35;
+
+18. select '20190603' from dual 에서 년도(YYYY), 월 (MM) ,일 (DD) 나누어 출력 (예 select substr('20190603',1,2) as YY from dual)
+select substring('20190604', 1,4) as yyyy, substring('20190604', 5, 2) as mm, substring('20190604', 7, 2) as dd FROM DUAL;
+
+
+19. select '여름인가요?     ' from dual 에서 공백을 없애서 출력
+select trim('여름인가요?   ') from dual;
+
+20. 현재 날짜출력 , YYYYMMDD 형식으로 출력, YYYY-MM-DD 형태로 출력, 내일 날짜를 YYYY-MM-DD 형태로 출력 , 한달 뒤의 날짜를 YYYY-MM-DD 형태로 출력 , 5일전 날짜를 YYYY-MM-DD 형태로 출력
+select CURRENT_DATE() FROM DUAL;
+select DATE_FORMAT(now(), '%Y%m%d') FROM DUAL;
+select DATE_FORMAT(now(), '%Y-%m-%d') FROM DUAL;
+select DATE_FORMAT(current_date() + 1, '%Y-%m-%d') FROM DUAL;
+select DATE_FORMAT(current_date() + interval 1 month, '%Y-%m-%d') FROM DUAL;
+select DATE_FORMAT(current_date() - interval 5 day, '%Y-%m-%d') FROM DUAL;
+
+21. '20190604' 와 '20190503' 가 몇 일이 차이가 나는지 출력 ( mysql, oracle 구분해서)
+MYSQL: SELECT DATEDIFF('2019-06-04', '2019-05-03');
+ORACLE: SELECT TO_DATE('2019-06-04', 'yyyy-mm-dd')+1 - TO_DATE('2019-05-03', 'yyyy-mm-dd') FROM DUAL;
+
+22. sample31 age가 30 보다 크거나 같으면 '30대' 출력 , 30보다 작고 20보다 크거나 같으면 '20대' 출력 , 그리고 나머지는 '10대' 로 출력 
+SELECT age, 
+case when age >=30 then "30대"
+when age >=20 then "20대" 
+else "10대"  end "세대" from sample31;
+
+23. sample21 테이블에서 birthday가 null 이면 오늘 날짜로 출력 (날짜의 형태는 'YYYY-MM-DD' , coalesce 활용)  
+select *, coalesce(birthday, date_format(now(), "%Y-%m-%d")) from sample21;
+
+24. oracle에서는 coalesce 사용 할 수 없다. oracle에서는 16번을 어떻게 해결 할 수 있는지 확인
+select *, coalesce(birthday, to_date(sysdate, 'YYYY-MM-DD' )from sample21;
+
+
