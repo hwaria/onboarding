@@ -1,0 +1,37 @@
+package homework;
+
+import java.util.*;
+
+public class Collection_sortByValues {
+
+	public static void main(String[] args) {
+			
+			Map <Integer, String> team = new HashMap<>();
+			
+			team.put(37, "문승진");
+			team.put(31, "이창준");
+			team.put(32, "변자룡");
+			team.put(88, "이정화");
+			team.put(99, "김진석");
+				
+			Iterator<Integer> it = Collection_sortByValues.sortbyValue(team).iterator();
+			while (it.hasNext()) {
+				int temp = (Integer) it.next();
+				System.out.println(temp + " : " + team.get(temp));
+				
+			}
+	}
+	public static List<Integer> sortbyValue(final Map<Integer, String> map) {
+		List<Integer> ranks = new ArrayList<Integer>(map.keySet());
+				
+		Collections.sort(ranks, new Comparator<Object>() {
+			public int compare(Object o1, Object o2) {
+				Object v1 = map.get(o1);
+				Object v2 = map.get(o2);
+				return ((Comparable<Object>)v1).compareTo(v2);
+			}
+			
+		});
+		return ranks;
+	}
+}
