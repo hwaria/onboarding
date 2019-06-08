@@ -79,42 +79,43 @@ public class Main {
 5. 4번 문제에서 3번째에 해당하는 사람의 이름은 무엇인지 출력해 보시오.
 6. 4번 문제에서 숫자 역순으로(내림차순) 정렬해서 출력해보시오
 7. 4번 문제에서 숫자가 아니라 이름순으로 정렬해보시오. (가나다 순)
+
+8. 4번 문제에서 이름 역순으로(내림차순) 정렬해보시오. (가나다 역순)
+package homework;
+
 import java.util.*;
 
-public class Main {
-	
-	
+public class Collection_sortByValues {
+
 	public static void main(String[] args) {
-		Map<Integer, String> a = new HashMap<>();	
-		a.put(1, "문승진");
-		a.put(22, "이창준");
-		a.put(33, "변자룡");
-		a.put(44, "이정화");
-		a.put(100, "김진석");
-		
-		Iterator it = sortbyvalue(a).iterator();
-		 
-		while (it.hasNext()) {
-			Integer temp = (Integer) it.next();
-			System.out.println(temp + " : " + a.get(temp));
-		}
-	}
-
-
-public static List sortbyvalue(final Map a) {
-	
-	List<String> ranksName = new ArrayList();
-	ranksName.addAll(a.keySet());
-	
-	Collections.sort(ranksName, new Comparator() {
-		public string compare(Object o1, Object o2) {
-			Object v1 = a.get(o1);
-			Object v2 = a.get(o2);
 			
-			return ((Comparable) v2).compareTo(v1);
-		}
-	});
-	return ranksName;
+			Map <Integer, String> team = new HashMap<>();
+			
+			team.put(37, "문승");
+			team.put(31, "이창");
+			team.put(32, "변자");
+			team.put(88, "이정");
+			team.put(99, "김진");
+				
+			Iterator<Integer> it = Collection_sortByValues.sortbyValue(team).iterator();
+			while (it.hasNext()) {
+				int temp = (Integer) it.next();
+				System.out.println(temp + " : " + team.get(temp));
+				
+			}
+	}
+	public static List<Integer> sortbyValue(final Map<Integer, String> map) {
+		List<Integer> ranks = new ArrayList<Integer>(map.keySet());
+				
+		Collections.sort(ranks, new Comparator<Object>() {
+			public int compare(Object o1, Object o2) {
+				Object v1 = map.get(o1);
+				Object v2 = map.get(o2);
+				return ((Comparable<Object>)v1).compareTo(v2);
+			}
+			
+		});
+		Collections.reverse(ranks);
+		return ranks;
+	}
 }
-} // 아직 안됨..
-8. 4번 문제에서 이름 역순으로(내림차순) 정렬해보시오. (가나다 역순)
