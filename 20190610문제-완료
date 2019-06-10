@@ -1,0 +1,203 @@
+1. 31강 예제 실습 하면서 학습
+
+2. 34강 예제 실습 하면서 학습
+
+3. 테이블 생성
+
+TABLE명: TBC1_BBS_WRT 
+FIELD			TYPE			NULL	KEY
+WRT_SEQ			int(11)	 		NO		PK			
+TITLE			varchar(300)	YES			
+BBS_ID			varchar(30)		YES			
+REGMN_ID		varchar(30)		YES		
+REG_DATE		DATE	
+
+CREATE table TBC1_BBS_WRT (
+WRT_SEQ INT(11) NOT NULL,
+TITLE VARCHAR(300),
+BBS_ID VARCHAR(30),
+REGMN_ID VARCHAR(30),
+REG_DATE DATE,
+primary key(WRT_SEQ)
+);
+
+
+TABLE명: TBC1_BBS_WRT_CNTN 
+FIELD			TYPE			NULL	KEY
+WRT_SEQ			int(11)	 		NO		PK			
+CNTN			CLOB			YES
+
+CREATE table TBC1_BBS_WRT_CNTN (
+WRT_SEQ INT(11) NOT NULL,
+CNTN TEXT,
+primary key(WRT_SEQ)
+);
+
+TABLE명: TBC1_BBS_WRT_RECENT_INFO 
+FIELD			TYPE			NULL	KEY
+WRT_SEQ			int(11)	 		NO		PK			
+RECM_NUM		int(10)
+HITS_NUM		int(10)
+COMT_NUM		int(10)
+
+CREATE table TBC1_BBS_WRT_RECENT_INFO (
+WRT_SEQ INT(11) NOT NULL,
+RECM_NUM INT(10),
+HITS_NUM INT(10),
+COMT_NUM INT(10),
+primary key(WRT_SEQ)
+);
+
+TABLE명: TBC1_ILLEGAL_WORD
+FIELD			TYPE				NULL	KEY
+WORD			varchar(30)	 		NO		PK			
+
+CREATE table TBC1_BBS_ILLEGAL_WORD (
+WORD VARCHAR(30) NOT NULL,
+primary key(WORD)
+);
+
+4.
+
+TBC1_BBS_WRT 테이블에 
+WRT_SEQ:1, TITLE:중국 시진핑의 여유 개별종목 중심으로 반등할 듯 ,BBS_ID: N10584, REGMN_ID:leechang0423 , REG_DATE : 20180101
+WRT_SEQ:2, TITLE:이런데도 주식시장이 되겟냐구요. BBS_ID: N10584 REGMN_ID:jdrake , REG_DATE : 20180301
+WRT_SEQ:3, TITLE:경제가 않 좋으면 꼭 운동선수들 팔팔 하더구만... ,BBS_ID: N10584 ,REGMN_ID:suh5842 , REG_DATE : 20180530
+WRT_SEQ:4, TITLE:[주식용어] 관종 , BBS_ID: N11018, REGMN_ID:webmaster , REG_DATE : 20190102
+WRT_SEQ:5, TITLE:#로봇테마 급등 , BBS_ID: N00801, REGMN_ID:alla321 , REG_DATE : 20190203
+WRT_SEQ:6, TITLE:매도 하셨나요? , BBS_ID: N00801, REGMN_ID:g_1560103829 , REG_DATE : 20190402
+WRT_SEQ:7, TITLE:외인들이 화폐개혁 관련주를 쓸어담고 있는데 , BBS_ID: N10983, REGMN_ID:smoothbv , REG_DATE : 20190503
+WRT_SEQ:8, TITLE:2년만에 첫거래 , BBS_ID: N00804, REGMN_ID:lionpooh , REG_DATE : 20190601
+WRT_SEQ:9, TITLE:차기 대선지지율. 황교안, 이낙연 제치고 최초 압도적 1위 (종합)상프로젝트 2019.0 , BBS_ID: N00820, REGMN_ID:jjin73774 , REG_DATE : 20190602
+WRT_SEQ:10, TITLE:유산세습은 빈부격차의 가장큰 원인이다~~~~^^ , BBS_ID: N10841, REGMN_ID:jaki7 , REG_DATE : 20190609
+
+INSERT INTO TBC1_BBS_WRT 
+VALUES(1,'중국 시진핑의 여유 개별종목 중심으로 반등할 듯', 'N10584', 'leechang0423', '20180101'),
+(2, '이런데도 주식시장이 되겟냐구요. ', 'N1058', 'jdrake', '20180301'),
+(3, '경제가 않 좋으면 꼭 운동선수들 팔팔 하더구만... ', 'N10584', 'suh5842', '20180530'),
+(4, '[주식용어] 관종 ', 'N11018', 'webmaster', '20190102'),
+(5, '#로봇테마 급등 ', 'N00801', 'alla3213', '20190203'),
+(6, '매도 하셨나요? ', 'N00801', 'g_1560103829', '20190402'),
+(7, '외인들이 화폐개혁 관련주를 쓸어담고 있는데', 'N10983', 'smoothbv',  '20190503'),
+(8, '2년만에 첫거래 ', 'N00804', 'lionpooh', '20190601'),
+(9, '차기 대선지지율. 황교안, 이낙연 제치고 최초 압도적 1위 (종합)상프로젝트 2019.0 ', 'N00820', 'jjin73774', '20190602'),
+(10, '유산세습은 빈부격차의 가장큰 원인이다~~~~^^ ', 'N10841', 'jaki7', '20190609');
+
+
+TBC1_BBS_WRT_CNTN 테이블에 
+WRT_SEQ:1, CNTN:지난주는  중국,미국 무역 마찰이 지속되는 가운데 시진핑은 러시아를 방문합니다  러시아 푸틴은 중국편을 들면서 미국의 화웨이 제재는 정당하지 않다고 지적합니다 국제질서를 어지럽히는 편파적이라는 것이죠 그후 중국시진핑은 트럼프가 자주쓰는 화법을 씁니다 "내친구 트럼프는 무역문제를 잘 해결 할 것이다"   친구, 좋아한다라는 말은 트럼프가 자주쓰는 말인데요,,,,,
+WRT_SEQ:2, CNTN:디램 고정 거래 가격 2018년 4/40일~9/28 : 8.19달러/개 2018년 12/28 7.25달러/개 2019년 5/31일: 3.75달러/개 하루 하루 갈수록  떨어지고 있다고.....
+WRT_SEQ:3, CNTN:우리나라 경제 좋지 못한 80년 시절 김일 박치기에 이어 홍수환이 7전팔기 박종팔, 등등 권투 선수들  잘 나가고 국민들 열광했지요. IMF당시 박세리의 양말 벗은 투혼으로 LPGA 우승...
+WRT_SEQ:4, CNTN:보통 '관종'은 관심을 지나치게 요구하는 사람을 뜻하지만 주식시장에서는 '관심종목'을 말한다. 
+WRT_SEQ:5, CNTN:로봇테마 급증 이라니
+WRT_SEQ:6, CNTN:짝짝짝.
+WRT_SEQ:7, CNTN:이거 정말 무슨 일이 일어나려 하는 건 아닌지 궁금해진다.
+WRT_SEQ:8, CNTN:납품가기전 잠시 시간을 내어 글을 써 봅니다. 증권사 직원, 퇴사, 큰사업후 실패, 고물주워 재기 노림..일만 한지 2년정도가 흘렀습니다.
+WRT_SEQ:9, CNTN:차기 대선지지율.  황교안, 이낙연 제치고 최초 압도적 1위 (종합) 차기 대선 지지도, 황교안 17.7%, 이낙연 12%, 유시민 9.3% 순 
+WRT_SEQ:10, CNTN:한국의 가장큰 문제는 유산세습과 부동산폭등 불로소득이다. 불로소득은 모두 환수해야 한다
+
+INSERT INTO TBC1_BBS_WRT_CNTN 
+VALUES(1,'지난주는  중국,미국 무역 마찰이 지속되는 가운데 시진핑은 러시아를 방문합니다  러시아 푸틴은 중국편을 들면서 미국의 화웨이 제재는 정당하지 않다고 지적합니다 국제질서를 어지럽히는 편파적이라는 것이죠 그후 중국시진핑은 트럼프가 자주쓰는 화법을 씁니다 \"내친구 트럼프는 무역문제를 잘 해결 할 것이다\"   친구, 좋아한다라는 말은 트럼프가 자주쓰는 말인데요,,,,,'),
+(2, '디램 고정 거래 가격 2018년 4/40일~9/28 : 8.19달러/개 2018년 12/28 7.25달러/개 2019년 5/31일: 3.75달러/개 하루 하루 갈수록  떨어지고 있다고.....'),
+(3, '우리나라 경제 좋지 못한 80년 시절 김일 박치기에 이어 홍수환이 7전팔기 박종팔, 등등 권투 선수들  잘 나가고 국민들 열광했지요. IMF당시 박세리의 양말 벗은 투혼으로 LPGA 우승...'),
+(4, '보통 \'관종\'은 관심을 지나치게 요구하는 사람을 뜻하지만 주식시장에서는 \'관심종목\'을 말한다.'),
+(5, '로봇테마 급증 이라니'),
+(6, '짝짝짝.'),
+(7, '이거 정말 무슨 일이 일어나려 하는 건 아닌지 궁금해진다.'),
+(8, '납품가기전 잠시 시간을 내어 글을 써 봅니다. 증권사 직원, 퇴사, 큰사업후 실패, 고물주워 재기 노림..일만 한지 2년정도가 흘렀습니다.'),
+(9, '차기 대선지지율.  황교안, 이낙연 제치고 최초 압도적 1위 (종합) 차기 대선 지지도, 황교안 17.7%, 이낙연 12%, 유시민 9.3% 순'),
+(10, '한국의 가장큰 문제는 유산세습과 부동산폭등 불로소득이다. 불로소득은 모두 환수해야 한다');
+
+TBC1_BBS_WRT_RECENT_INFO 테이블에 
+WRT_SEQ:1, RECM_NUM:101 , HITS_NUM:56 , COMT_NUM :32 
+WRT_SEQ:2, RECM_NUM:55 , HITS_NUM:44 , COMT_NUM :87
+WRT_SEQ:3, RECM_NUM:88 , HITS_NUM:42 , COMT_NUM :27
+WRT_SEQ:4, RECM_NUM:32 , HITS_NUM:87 , COMT_NUM :65
+WRT_SEQ:5, RECM_NUM:52 , HITS_NUM:99 , COMT_NUM :32
+WRT_SEQ:6, RECM_NUM:12 , HITS_NUM:230 , COMT_NUM :7
+WRT_SEQ:7, RECM_NUM:89 , HITS_NUM:888 , COMT_NUM :2
+WRT_SEQ:8, RECM_NUM:21 , HITS_NUM:815 , COMT_NUM :4
+WRT_SEQ:9, RECM_NUM:30 , HITS_NUM:326 , COMT_NUM :3
+WRT_SEQ:10, RECM_NUM:32 , HITS_NUM:221 , COMT_NUM :2
+
+INSERT INTO TBC1_BBS_WRT_RECENT_INFO
+VALUES(1,101, 56, 32),
+(2,55, 44, 87),
+(3,88, 42, 27),
+(4,32, 87, 65),
+(5,52, 99, 32),
+(6,12, 230, 7),
+(7,89, 888, 2),
+(8,21, 815, 4),
+(9,30, 326, 3),
+(10,32, 221, 2);
+
+TBC1_ILLEGAL_WORD 테이블에
+WORD : 관종
+WORD : 대선지지
+WORD : 황교안
+
+INSERT INTO TBC1_BBS_ILLEGAL_WORD
+VALUES('관종'),
+('대선지지'),
+('황교안');
+
+5. WRT_SEQ, TITLE,BBS_ID, REGMN_ID, CNTN , RECM_NUM , HITS_NUM ,COMT_NUM 출력
+SELECT BW.WRT_SEQ, BW.TITLE, BW.BBS_ID, BW.REGMN_ID, BWC.CNTN, BWRI.RECM_NUM, BWRI.HITS_NUM, BWRI.COMT_NUM
+FROM TBC1_BBS_WRT BW LEFT JOIN TBC1_BBS_WRT_CNTN BWC ON (BW.WRT_SEQ = BWC.WRT_SEQ)
+LEFT JOIN TBC1_BBS_WRT_RECENT_INFO BWRI ON (BW.WRT_SEQ = BWRI.WRT_SEQ);
+ 
+6. BBS_ID 별 RECM_NUM 합산 , HITS_NUM 합산, COMT_NUM 합산 출력
+SELECT BW.WRT_SEQ, BW.BBS_ID, SUM(BWRI.RECM_NUM), SUM(BWRI.HITS_NUM), SUM(BWRI.COMT_NUM) FROM TBC1_BBS_WRT BW
+LEFT JOIN TBC1_BBS_WRT_RECENT_INFO BWRI ON (BW.WRT_SEQ = BWRI.WRT_SEQ) GROUP BY BBS_ID;
+
+
+7. WRT_SEQ, TITLE,BBS_ID, REGMN_ID, CNTN , RECM_NUM , HITS_NUM ,COMT_NUM 한 페이지에 3건식 나오도록 출력 (WRT_SEQ 내림차순으로)
+SELECT BW.WRT_SEQ, BW.TITLE, BW.BBS_ID, BW.REGMN_ID, BWC.CNTN, BWRI.RECM_NUM, BWRI.HITS_NUM, BWRI.COMT_NUM
+FROM TBC1_BBS_WRT BW LEFT JOIN TBC1_BBS_WRT_CNTN BWC ON (BW.WRT_SEQ = BWC.WRT_SEQ)
+LEFT JOIN TBC1_BBS_WRT_RECENT_INFO BWRI ON (BW.WRT_SEQ = BWRI.WRT_SEQ) limit 3 offset 0;
+
+8. 2019년도에 작성한 리스트 출력
+SELECT BW.WRT_SEQ, BW.TITLE, BW.BBS_ID, BW.REGMN_ID, BWC.CNTN, BWRI.RECM_NUM, BWRI.HITS_NUM, BWRI.COMT_NUM
+FROM TBC1_BBS_WRT BW LEFT JOIN TBC1_BBS_WRT_CNTN BWC ON (BW.WRT_SEQ = BWC.WRT_SEQ)
+LEFT JOIN TBC1_BBS_WRT_RECENT_INFO BWRI ON (BW.WRT_SEQ = BWRI.WRT_SEQ) where (SUBSTRING(BW.REG_DATE, 1, 4) =2019) ;
+
+9. 최근 10일 이내에 작성한 글 리스트 출력
+SELECT BW.WRT_SEQ, BW.TITLE, BW.BBS_ID, BW.REGMN_ID, BWC.CNTN, BWRI.RECM_NUM, BWRI.HITS_NUM, BWRI.COMT_NUM
+FROM TBC1_BBS_WRT BW LEFT JOIN TBC1_BBS_WRT_CNTN BWC ON (BW.WRT_SEQ = BWC.WRT_SEQ)
+LEFT JOIN TBC1_BBS_WRT_RECENT_INFO BWRI ON (BW.WRT_SEQ = BWRI.WRT_SEQ) where (Datediff(now(), BW.REG_DATE) <= 10) ;
+
+10. 월별 작성된 글 카운트 출력
+SELECT YEAR(TBC1_bbs_wrt.REG_DATE) 'YEAR', MONTH(TBC1_bbs_wrt.REG_DATE) 'MONTH', count(WRT_SEQ) '작성글 ㅅ' 
+FROM TBC1_bbs_wrt group by month(REG_DATE);
+
+11. (월,BBS_ID) 별 작성된 글 카운트 출력
+SELECT YEAR(TBC1_bbs_wrt.REG_DATE) 'YEAR', MONTH(TBC1_bbs_wrt.REG_DATE) 'MONTH', BBS_ID, count(WRT_SEQ) '작성글 수' 
+FROM TBC1_bbs_wrt group by month(REG_DATE), BBS_ID;
+
+12. 19년도에 작성된 글 갯수와 18년도에 작성된 글 갯 수 차이
+SELECT (SELECT COUNT(wrt_seq) FROM TBC1_BBS_WRT BW WHERE (SUBSTRING(BW.REG_DATE, 1, 4) =2019))
+ - (SELECT COUNT(wrt_seq) FROM TBC1_BBS_WRT BW WHERE (SUBSTRING(BW.REG_DATE, 1, 4) =2018)) "2018, 2019 작성글 수 차이";
+
+13. 5번 리스트에서 글내용(CNTN) 에  ILLEGAL_WORD가 들어간 리스트만 출력
+SELECT BW.WRT_SEQ, BW.TITLE, BW.BBS_ID, BW.REGMN_ID, BWC.CNTN, BWRI.RECM_NUM, BWRI.HITS_NUM, BWRI.COMT_NUM
+FROM TBC1_BBS_WRT BW LEFT JOIN TBC1_BBS_WRT_CNTN BWC ON (BW.WRT_SEQ = BWC.WRT_SEQ)
+LEFT JOIN TBC1_BBS_WRT_RECENT_INFO BWRI ON (BW.WRT_SEQ = BWRI.WRT_SEQ) 
+where BWC.CNTN like '%관종%' or BWC.CNTN like '%대선%' or BWC.CNTN like '%황교안%';
+
+SELECT BW.WRT_SEQ, BW.TITLE, BW.BBS_ID, BW.REGMN_ID, BWC.CNTN, BWRI.RECM_NUM, BWRI.HITS_NUM, BWRI.COMT_NUM
+FROM TBC1_BBS_WRT BW LEFT JOIN TBC1_BBS_WRT_CNTN BWC ON (BW.WRT_SEQ = BWC.WRT_SEQ)
+LEFT JOIN TBC1_BBS_WRT_RECENT_INFO BWRI ON (BW.WRT_SEQ = BWRI.WRT_SEQ) 
+where EXISTS (
+  select * from TBC1_BBS_ILLEGAL_WORD where BWC.CNTN like CONCAT('%', word, '%')
+)
+;
+
+
+
+
+
+
+
+
+
