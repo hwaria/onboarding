@@ -1,0 +1,67 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Main4_data2 {
+	public static void main(String[] args) {
+				DataMap map = new DataMap();
+		HashMap<String, Object> infoMap = (HashMap<String, Object>) map.getMap();
+		
+		Integer idx = 0;
+		HashMap<String, Object>map1 = (HashMap<String, Object>) infoMap.get("map1");
+		HashMap<String, Object>map1_1 = (HashMap<String, Object>) map1.get("stockInfo");
+		List <String> stockName = (List) map1_1.get("stockNameInfo");
+//		System.out.println(infoMap.toString());
+		
+		HashMap<String, Object>map2 = (HashMap<String, Object>) infoMap.get("map2");
+		HashMap<String, Object>map2_1 = (HashMap<String, Object>) map2.get("stockInfo");
+		List <String> stockName2 = (List) map2_1.get("stockNameInfo");
+		
+		// 코스피, 코스닥별로 정렬해주는 메소드만들어보기
+		HashMap<String, Object> resMap1 = new HashMap<>();
+		HashMap<String, Object> resMap2 = new HashMap<>();
+	    for(int i = 0; i < stockName.size(); i++) {
+        	List list = new ArrayList<>();
+        	list.add(((List) map1_1.get("siseInfo")).get(i));
+        	list.add(((List) map1_1.get("frgnInfo")).get(i));
+        	list.add(((List) map1_1.get("orgInfo")).get(i));
+        	list.add(((List) map1_1.get("indiInfo")).get(i));
+        	resMap1.put(stockName.get(i), list);
+        }
+		for (int i = 0; i < stockName.size(); i++) {
+			if (stockName.get(i) == "삼성전자") {
+				idx = i;
+				break;
+			}
+		}
+		
+	    for(int i = 0; i < stockName.size(); i++) {
+        	List list = new ArrayList<>();
+        	list.add(((List) map2_1.get("siseInfo")).get(i));
+        	list.add(((List) map2_1.get("frgnInfo")).get(i));
+        	list.add(((List) map2_1.get("orgInfo")).get(i));
+        	list.add(((List) map2_1.get("indiInfo")).get(i));
+        	resMap2.put(stockName.get(i), list);
+        }
+	    
+	   
+		System.out.println(resMap1.toString());
+	    List<Map> sortedMaps = new ArrayList();
+	    sortedMaps.add(resMap1);
+	    sortedMaps.add(resMap2);
+	    
+	    // 코스피, 코스닥별로 전체 종목을 10개씩 나눠서 출력하기
+	    for (Map m: sortedMaps) {
+	    	System.out.println("코스피 종목");
+	    	System.out.println("------------------------------------");
+	    	for (int p = 1; p <=10; p++) {
+	    		System.out.println(stockName.get(p) + m.get(stockName.get(p)));
+	    	}
+	    	
+	    	System.out.println("코스닥 종목");
+	    	
+	    }
+		
+	}
+}
