@@ -1057,3 +1057,107 @@ public class Main3 {
 	}
 	
 	} 
+
+-	가격이 1330인 종목의 정보들을 출력해보자
+public class Main3 {
+   
+	public static void main(String[] args) {
+		DataMap map = new DataMap();
+        HashMap<String, Object> infoMap = (HashMap<String, Object>) map.getMap();
+        HashMap<String, Object> resMap = new HashMap<>();
+//        System.out.println(infoMap.toString());
+//        {stockNameInfo=[백광소재, 차이나하오란, 삼성전자, 팍스넷], 
+//        siseInfo=[1000, 2050, 1330, 250], 
+//        		frgnInfo=[11.51, 20.32, 33.13, 76.91], 
+//        		orgInfo=[11.51, 57.22, 21.7, 45.52], 
+//        		indiInfo=[7.53, 0.52, 15.75, 11.22]}
+
+        String [] keys = {"stockNameInfo","siseInfo","frgnInfo","orgInfo","indiInfo"};
+        
+        List<String> list1 = (List<String>) infoMap.get(keys[0]);
+        List<Integer> list2 = (List<Integer>) infoMap.get(keys[1]);
+        List<Double> list3 = (List<Double>) infoMap.get(keys[2]);
+        List<Double> list4 = (List<Double>) infoMap.get(keys[3]);
+        List<Double> list5 = (List<Double>) infoMap.get(keys[4]);
+        
+        for(int i = 0; i < list1.size(); i++) {
+        	List list = new ArrayList<>();
+        	list.add(list2.get(i));
+        	list.add(list3.get(i));
+        	list.add(list4.get(i));
+        	list.add(list5.get(i));
+        	resMap.put(list1.get(i), list);
+        } // 여기까지 위 코드와 동일 
+          
+        int idx = 0;
+        for (String key : resMap.keySet()) {
+        	for (int i = 0; i < list1.size(); i++) {
+        		if (((List) resMap.get(list1.get(i))).contains(1330)) {
+        			idx = i;
+        			break;
+        	}
+        	}
+        }
+        
+        //자룡쌤코드
+//        for (String name : list1){
+//			List <Double>priceList = (List) resMap.get(name);
+//			//int price = (int) ((List) resMap.get(name)).get(0);
+//			if ((int) ((List) resMap.get(name)).get(0) == 1330){
+//				System.out.println("종목명은?>"+name+" 											시세정보는?>"+priceList.toString());
+//			}
+//		}
+  
+        System.out.println(list1.get(idx) + resMap.get(list1.get(idx)));
+        // 출력결과 삼성전자[1330, 33.13, 21.7, 15.75]
+	}
+	}
+
+-	DataMap map = new DataMap(); 을 해서 map.getMap()을 하면 맵이 리턴이 되는데, 이 안에는 map1 , map2 라는 맵이 들어있음. 이 각각의 맵에는  stockType이 kosdaq(코스닥) , stockType이 kospi(코스피) 를 나누어져 들어가 있음.각각의 코스닥, 코스피 종목들을 종목명, 가격, 보유 비율 등으로 재정렬해보시오
+public class Main4_data2 {
+	public static void main(String[] args) {
+		
+		DataMap map = new DataMap();
+		HashMap<String, Object> infoMap = (HashMap<String, Object>) map.getMap();
+		
+		Integer idx = 0;
+		HashMap<String, Object>map1 = (HashMap<String, Object>) infoMap.get("map1");
+		HashMap<String, Object>map1_1 = (HashMap<String, Object>) map1.get("stockInfo");
+		List <String> stockName = (List) map1_1.get("stockNameInfo");
+	
+		
+		HashMap<String, Object>map2 = (HashMap<String, Object>) infoMap.get("map2");
+		HashMap<String, Object>map2_1 = (HashMap<String, Object>) map2.get("stockInfo");
+		List <String> stockName2 = (List) map2_1.get("stockNameInfo");
+		
+		
+		HashMap<String, Object> resMap1 = new HashMap<>();
+		HashMap<String, Object> resMap2 = new HashMap<>();
+	    for(int i = 0; i < stockName.size(); i++) {
+        	List list = new ArrayList<>();
+        	list.add(((List) map1_1.get("siseInfo")).get(i));
+        	list.add(((List) map1_1.get("frgnInfo")).get(i));
+        	list.add(((List) map1_1.get("orgInfo")).get(i));
+        	list.add(((List) map1_1.get("indiInfo")).get(i));
+        	resMap1.put(stockName.get(i), list);
+        }
+		for (int i = 0; i < stockName.size(); i++) {
+			if (stockName.get(i) == "삼성전자") {
+				idx = i;
+				break;
+			}
+		}
+		
+	    for(int i = 0; i < stockName.size(); i++) {
+        	List list = new ArrayList<>();
+        	list.add(((List) map2_1.get("siseInfo")).get(i));
+        	list.add(((List) map2_1.get("frgnInfo")).get(i));
+        	list.add(((List) map2_1.get("orgInfo")).get(i));
+        	list.add(((List) map2_1.get("indiInfo")).get(i));
+        	resMap2.put(stockName.get(i), list);
+        }
+		    
+		System.out.println(stockName.get(idx) + resMap1.get("삼성전자"));
+		System.out.println(resMap1.toString());
+	}
+}
