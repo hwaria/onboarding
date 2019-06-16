@@ -3,71 +3,125 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Main4_data2 {
-	public static void main(String[] args) {
-				DataMap map = new DataMap();
-		HashMap<String, Object> infoMap = (HashMap<String, Object>) map.getMap();
-		
+public class Main {
+	public static void printStocks(HashMap stockType) {
+		List stockNames = new ArrayList(stockType.keySet());
 		Integer idx = 0;
-		HashMap<String, Object>map1 = (HashMap<String, Object>) infoMap.get("map1");
-		HashMap<String, Object>map1_1 = (HashMap<String, Object>) map1.get("stockInfo");
-		List <String> stockName = (List) map1_1.get("stockNameInfo");
-//		System.out.println(infoMap.toString());
+		Integer newIdx = 0;
+		Integer numsPage = stockNames.size() / 10 + 1;;
 		
-		HashMap<String, Object>map2 = (HashMap<String, Object>) infoMap.get("map2");
-		HashMap<String, Object>map2_1 = (HashMap<String, Object>) map2.get("stockInfo");
-		List <String> stockName2 = (List) map2_1.get("stockNameInfo");
-		
-		HashMap<String, Object> resMap1 = new HashMap<>();
-		HashMap<String, Object> resMap2 = new HashMap<>();
-	    for(int i = 0; i < stockName.size(); i++) {
-        	List list = new ArrayList<>();
-        	list.add(((List) map1_1.get("siseInfo")).get(i));
-        	list.add(((List) map1_1.get("frgnInfo")).get(i));
-        	list.add(((List) map1_1.get("orgInfo")).get(i));
-        	list.add(((List) map1_1.get("indiInfo")).get(i));
-        	resMap1.put(stockName.get(i), list);
-        }
-		for (int i = 0; i < stockName.size(); i++) {
-			if (stockName.get(i) == "삼성전자") {
-				idx = i;
-				break;
-			}
-		}
-		
-	    for(int i = 0; i < stockName.size(); i++) {
-        	List list = new ArrayList<>();
-        	list.add(((List) map2_1.get("siseInfo")).get(i));
-        	list.add(((List) map2_1.get("frgnInfo")).get(i));
-        	list.add(((List) map2_1.get("orgInfo")).get(i));
-        	list.add(((List) map2_1.get("indiInfo")).get(i));
-        	resMap2.put(stockName.get(i), list);
-        }
-	    
-	   	    List<Map> sortedMaps = new ArrayList();
-	    sortedMaps.add(resMap1);
-	    sortedMaps.add(resMap2);
-	    
-	    // 숙제 1) 코스피, 코스닥별로 전체 종목을 10개씩 나눠서 출력하기
-	    
-	 	
+		System.out.println("------------------------------------");
 		for (int i = 0; i < numsPage;i++) {
-			
 			for (int j = idx; j < idx + 10; j++) {
-				System.out.println(stocks.get(newIdx) +": " +kospiStocks.get(stocks.get(newIdx)));
+				System.out.println(stockNames.get(newIdx) +": " + stockType.get(stockNames.get(newIdx)));
 				newIdx++;
-				if (newIdx == stocks.size()) {
+				if (newIdx == stockNames.size()) {
 					break;
 				}
 				
 			}
-			System.out.println("------------End of Page------------");
+			System.out.println("--------------End of Page--------------");
 			idx = newIdx;
 
 		}	
-		//현재 코스피 종목 글 10개씩 출력. 다음 코스닥도 종목 10개씩 출력되게 하기.. 
-	    System.out.println("코스 종목");
-
-	    
+		System.out.println();
+		
 	}
+	public static void main(String[] args) {
+		DataMap map = new DataMap();
+		HashMap<String, Object> infoMap = (HashMap<String, Object>) map.getMap();
+		
+		HashMap <String, Object> map1_kospi = (HashMap<String, Object>) ((Map<String, Object>) infoMap).get("map1");
+		HashMap <String, Object> map2_kosdaq = (HashMap<String, Object>) ((Map<String, Object>) infoMap).get("map2");
+		HashMap <String, Object> kospi = (HashMap<String, Object>) map1_kospi.get("stockInfo");
+		HashMap <String, Object> kosdaq = (HashMap<String, Object>) map2_kosdaq.get("stockInfo");
+		
+		List <String> stocks = (List<String>) kospi.get("stockNameInfo");
+		List <String> stocks2 = (List<String>) kosdaq.get("stockNameInfo");
+		HashMap <String, Object> kospiStocks = new HashMap();
+		HashMap <String, Object> kosdaqStocks = new HashMap();
+		
+		for (int i = 0; i < stocks.size(); i++) {
+			List templist = new ArrayList();
+			templist.add(((List) kospi.get("siseInfo")).get(i));
+			templist.add(((List) kospi.get("frgnInfo")).get(i));
+			templist.add(((List) kospi.get("orgInfo")).get(i));
+			templist.add(((List) kospi.get("indiInfo")).get(i));
+			kospiStocks.put(stocks.get(i), templist);
+	
+		}
+		for (int i = 0; i < stocks.size(); i++) {
+			List templist = new ArrayList();
+			templist.add(((List) kosdaq.get("siseInfo")).get(i));
+			templist.add(((List) kosdaq.get("frgnInfo")).get(i));
+			templist.add(((List) kosdaq.get("orgInfo")).get(i));
+			templist.add(((List) kosdaq.get("indiInfo")).get(i));
+			kosdaqStocks.put(stocks2.get(i), templist);
+		}
+
+		System.out.println("코스피종목 ");
+		printStocks(kospiStocks);
+		System.out.println("코스닥종목 ");
+		printStocks(kosdaqStocks);
+	}
+	
 }
+
+=> 출력결과
+코스피종목 
+------------------------------------
+차이나하오란: [2050, 20.32, 57.22, 1.12]
+샘코: [2055, 21.32, 7.22, 3.52]
+유비쿼스: [10000, 80.13, 28.7, 15.21]
+흥구석유: [30000, 99.91, 45.52, 11.25]
+삼성전자: [1330, 33.13, 21.7, 15.75]
+SG세계물산: [2510, 76.91, 45.5, 15.22]
+백광소재: [1000, 11.51, 11.51, 7.53]
+팍스넷: [5220, 55.91, 41.55, 19.22]
+한창제지: [1530, 11.51, 11.51, 7.53]
+코닉글로리: [2050, 21.32, 57.22, 1.12]
+--------------End of Page--------------
+이원컴포텍: [1330, 3.13, 21.7, 15.75]
+SG&G: [1380, 3.13, 25.72, 18.75]
+우정바이오: [100050, 99.91, 45.52, 11.25]
+디알텍: [1000, 11.51, 11.51, 7.53]
+휴네시온: [2252, 3.13, 22.76, 11.75]
+코미팜: [10000, 12.51, 52.53, 80.53]
+줌인터넷: [8400, 27.51, 16.51, 11.53]
+지어소프트: [5220, 27.51, 3.22, 0.48]
+한창: [60030, 80.13, 28.7, 15.21]
+이엠코리아: [10050, 20.32, 3.22, 0.48]
+--------------End of Page--------------
+이스트소프트: [30000, 20.32, 50.22, 42.51]
+현대바이오: [20, 76.91, 43.52, 11.22]
+--------------End of Page--------------
+
+코스닥종목 
+------------------------------------
+차이나하오란: [2050, 20.32, 57.22, 1.12]
+샘코: [2055, 21.32, 7.22, 3.52]
+유비쿼스: [10000, 80.13, 28.7, 15.21]
+흥구석유: [30000, 99.91, 45.52, 11.25]
+삼성전자: [1330, 33.13, 21.7, 15.75]
+SG세계물산: [2510, 76.91, 45.5, 15.22]
+백광소재: [1000, 11.51, 11.51, 7.53]
+팍스넷: [5220, 55.91, 41.55, 19.22]
+한창제지: [1530, 11.51, 11.51, 7.53]
+코닉글로리: [2050, 21.32, 57.22, 1.12]
+--------------End of Page--------------
+이원컴포텍: [1330, 3.13, 21.7, 15.75]
+SG&G: [1380, 3.13, 25.72, 18.75]
+우정바이오: [100050, 99.91, 45.52, 11.25]
+디알텍: [1000, 11.51, 11.51, 7.53]
+휴네시온: [2252, 3.13, 22.76, 11.75]
+코미팜: [10000, 12.51, 52.53, 80.53]
+줌인터넷: [8400, 27.51, 16.51, 11.53]
+지어소프트: [5220, 27.51, 3.22, 0.48]
+한창: [60030, 80.13, 28.7, 15.21]
+이엠코리아: [10050, 20.32, 3.22, 0.48]
+--------------End of Page--------------
+이스트소프트: [30000, 20.32, 50.22, 42.51]
+현대바이오: [20, 76.91, 43.52, 11.22]
+--------------End of Page--------------
+
+
