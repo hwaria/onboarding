@@ -1161,3 +1161,100 @@ public class Main4_data2 {
 		System.out.println(resMap1.toString());
 	}
 }
+- 주말숙제 2 (미완료)
+주말 두번째 숙제
+	    //객체(클래스)를 하나 만드는데.. 
+//	    그 안에 들어가는건 종목코드(symbol)-12자리[영문4자리+숫자8자리], 종목명(name), 종목코드단축형(stockCode)-6자리[숫자6자리], 업종명(unjong), 거래소구분[코스닥/코스피](exchange), 현재가(close), 상한가(upLimit), 하한가(downLimit), 외국인 보유비율(foreignRate)
+//	    등이 변수로 있을때...
+//	    이 객체를 이용하여 10개정도 임의의 종목값을 변수에 맞게 넣고..
+//	    종목별로 종목코드를 키값으로 하여 맵에 담고.,..
+//	    거래소구분값을 다섯개 정도를 코스피, 나머지 5개 정도를 코스닥으로 주어서
+//	    그에 맞는 값들을 나누어 다시 또 맵에 담아요
+//	    그리고 그 담은 녀석들을 다시 풀어서 출력하는데
+//	    넣었던 것처럼
+//
+//	    코스피, 코스닥으로 나누어서 출력되도록
+//
+//	    해보시오
+
+import java.util.Random;
+
+public class stockDetails {
+	public StringBuffer symbol;
+	public String name;
+	public int stockCode;
+	public String upjong;
+	public String stockType;
+	public int close;
+	public int upLimit;
+	public int downLimit;
+	public double foreignRate;
+	
+	
+	public String getRandomInt(int n) {
+		Random ran = new Random();
+		StringBuffer buf = new StringBuffer();
+		
+		for (int i = 0; i < n; i++)
+		{
+			buf.append(ran.nextInt(10));
+		}
+		
+		return buf.toString();
+	}
+	
+	public StringBuffer getRandomChar(int n) {
+		Random ran = new Random();
+		StringBuffer buf = new StringBuffer();
+		for (int i = 0; i < n; i++) {
+			buf.append((char)(int)(Math.random()*26) + 65);
+		}
+			return buf;
+	}
+	
+	public StringBuffer newSymbol() {
+		symbol = getRandomChar(4).append(getRandomInt(8));
+		return symbol;
+	}
+	
+	public int newCode() {
+		int code = Integer.parseInt(getRandomInt(6));
+		return code;
+	}
+	public stockDetails(String name, String stockType, 
+			int close, int upLimit, int downLimit, double foreignRate) {
+		this.symbol = newSymbol();
+		this.name = name;
+		this.stockCode = newCode();
+		this.stockType = stockType;
+		this.close = close;
+		this.upLimit = upLimit;
+		this.downLimit = downLimit;
+		this.foreignRate = foreignRate;
+	}
+	
+	
+}
+import java.util.HashMap;
+
+public class Main2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		HashMap<Integer, Object> info = new HashMap();
+		
+		info.put((stockDetails)stockCode, new stockDetails("lg", "코스피", 21000, 35000, 19000, 0.3476));
+		stockDetails apple = new stockDetails("apple", "코스피", 31000, 35000, 19000, 0.5323);
+		stockDetails samsung = new stockDetails("samsung", "코스피", 41000, 35000, 19000, 0.2342);
+		stockDetails sony = new stockDetails("sony","코스피", 51000, 35000, 19000, 0.2465);
+		stockDetails alto = new stockDetails("alto","코스피", 24000, 35000, 19000, 0.6243);
+		stockDetails beta = new stockDetails("beta", "코스닥 ", 45000, 35000, 19000, 0.98432);
+		stockDetails star = new stockDetails("star", "코스닥 ", 42000, 35000, 19000, 0.1233);
+		stockDetails square = new stockDetails("square", "코스닥 ", 12000, 35000, 19000, 0.3476);
+		stockDetails triple = new stockDetails("triple", "코스닥 ", 32000, 35000, 19000, 0.3476);
+		stockDetails single = new stockDetails("single","코스닥 ", 43000, 35000, 19000, 0.3476);
+		
+		System.out.println(lg);
+	}
+	
+}
