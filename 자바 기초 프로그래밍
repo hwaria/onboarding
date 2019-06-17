@@ -1161,100 +1161,197 @@ public class Main4_data2 {
 		System.out.println(resMap1.toString());
 	}
 }
-- 주말숙제 2 (미완료)
-주말 두번째 숙제
-	    //객체(클래스)를 하나 만드는데.. 
-//	    그 안에 들어가는건 종목코드(symbol)-12자리[영문4자리+숫자8자리], 종목명(name), 종목코드단축형(stockCode)-6자리[숫자6자리], 업종명(unjong), 거래소구분[코스닥/코스피](exchange), 현재가(close), 상한가(upLimit), 하한가(downLimit), 외국인 보유비율(foreignRate)
-//	    등이 변수로 있을때...
-//	    이 객체를 이용하여 10개정도 임의의 종목값을 변수에 맞게 넣고..
-//	    종목별로 종목코드를 키값으로 하여 맵에 담고.,..
-//	    거래소구분값을 다섯개 정도를 코스피, 나머지 5개 정도를 코스닥으로 주어서
-//	    그에 맞는 값들을 나누어 다시 또 맵에 담아요
-//	    그리고 그 담은 녀석들을 다시 풀어서 출력하는데
-//	    넣었던 것처럼
-//
-//	    코스피, 코스닥으로 나누어서 출력되도록
-//
-//	    해보시오
 
-import java.util.Random;
-
-public class stockDetails {
-	public StringBuffer symbol;
-	public String name;
-	public int stockCode;
-	public String upjong;
-	public String stockType;
-	public int close;
-	public int upLimit;
-	public int downLimit;
-	public double foreignRate;
-	
-	
-	public String getRandomInt(int n) {
-		Random ran = new Random();
-		StringBuffer buf = new StringBuffer();
+-	코스피, 코스닥별로 전체 종목을 10개씩 나눠서 출력하기
+public class Main4_data2 {
+	public static void printStocks(HashMap stockType) {
+		List stockNames = new ArrayList(stockType.keySet());
+		Integer idx = 0;
+		Integer newIdx = 0;
+		Integer numsPage = stockNames.size() / 10 + 1;;
 		
-		for (int i = 0; i < n; i++)
-		{
-			buf.append(ran.nextInt(10));
-		}
-		
-		return buf.toString();
-	}
-	
-	public StringBuffer getRandomChar(int n) {
-		Random ran = new Random();
-		StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < n; i++) {
-			buf.append((char)(int)(Math.random()*26) + 65);
-		}
-			return buf;
-	}
-	
-	public StringBuffer newSymbol() {
-		symbol = getRandomChar(4).append(getRandomInt(8));
-		return symbol;
-	}
-	
-	public int newCode() {
-		int code = Integer.parseInt(getRandomInt(6));
-		return code;
-	}
-	public stockDetails(String name, String stockType, 
-			int close, int upLimit, int downLimit, double foreignRate) {
-		this.symbol = newSymbol();
-		this.name = name;
-		this.stockCode = newCode();
-		this.stockType = stockType;
-		this.close = close;
-		this.upLimit = upLimit;
-		this.downLimit = downLimit;
-		this.foreignRate = foreignRate;
-	}
-	
-	
-}
-import java.util.HashMap;
+		System.out.println("------------------------------------");
+		for (int i = 0; i < numsPage;i++) {
+			for (int j = idx; j < idx + 10; j++) {
+				System.out.println(stockNames.get(newIdx) +": " + 							stockType.get(stockNames.get(newIdx)));
+				newIdx++;
+				if (newIdx == stockNames.size()) {
+					break;
+				}
+				
+			}
+			System.out.println("--------------End of Page--------------");
+			idx = newIdx;
 
-public class Main2 {
+		}	
+		System.out.println();
+		
+	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		HashMap<Integer, Object> info = new HashMap();
-		
-		info.put((stockDetails)stockCode, new stockDetails("lg", "코스피", 21000, 35000, 19000, 0.3476));
-		stockDetails apple = new stockDetails("apple", "코스피", 31000, 35000, 19000, 0.5323);
-		stockDetails samsung = new stockDetails("samsung", "코스피", 41000, 35000, 19000, 0.2342);
-		stockDetails sony = new stockDetails("sony","코스피", 51000, 35000, 19000, 0.2465);
-		stockDetails alto = new stockDetails("alto","코스피", 24000, 35000, 19000, 0.6243);
-		stockDetails beta = new stockDetails("beta", "코스닥 ", 45000, 35000, 19000, 0.98432);
-		stockDetails star = new stockDetails("star", "코스닥 ", 42000, 35000, 19000, 0.1233);
-		stockDetails square = new stockDetails("square", "코스닥 ", 12000, 35000, 19000, 0.3476);
-		stockDetails triple = new stockDetails("triple", "코스닥 ", 32000, 35000, 19000, 0.3476);
-		stockDetails single = new stockDetails("single","코스닥 ", 43000, 35000, 19000, 0.3476);
-		
-		System.out.println(lg);
-	}
+		System.out.println("코스피종목 ");
+		printStocks(resMap1);
+		System.out.println("코스닥종목 ");
+		printStocks(resMap2);
+}}
+	출력결과
+코스피종목 
+------------------------------------
+차이나하오란: [2050, 20.32, 57.22, 1.12]
+샘코: [2055, 21.32, 7.22, 3.52]
+유비쿼스: [10000, 80.13, 28.7, 15.21]
+흥구석유: [30000, 99.91, 45.52, 11.25]
+삼성전자: [1330, 33.13, 21.7, 15.75]
+SG세계물산: [2510, 76.91, 45.5, 15.22]
+백광소재: [1000, 11.51, 11.51, 7.53]
+팍스넷: [5220, 55.91, 41.55, 19.22]
+한창제지: [1530, 11.51, 11.51, 7.53]
+코닉글로리: [2050, 21.32, 57.22, 1.12]
+--------------End of Page--------------
+이원컴포텍: [1330, 3.13, 21.7, 15.75]
+SG&G: [1380, 3.13, 25.72, 18.75]
+우정바이오: [100050, 99.91, 45.52, 11.25]
+디알텍: [1000, 11.51, 11.51, 7.53]
+휴네시온: [2252, 3.13, 22.76, 11.75]
+코미팜: [10000, 12.51, 52.53, 80.53]
+줌인터넷: [8400, 27.51, 16.51, 11.53]
+지어소프트: [5220, 27.51, 3.22, 0.48]
+한창: [60030, 80.13, 28.7, 15.21]
+이엠코리아: [10050, 20.32, 3.22, 0.48]
+--------------End of Page--------------
+이스트소프트: [30000, 20.32, 50.22, 42.51]
+현대바이오: [20, 76.91, 43.52, 11.22]
+--------------End of Page--------------
+
+코스닥종목 
+------------------------------------
+차이나하오란: [2050, 20.32, 57.22, 1.12]
+샘코: [2055, 21.32, 7.22, 3.52]
+유비쿼스: [10000, 80.13, 28.7, 15.21]
+...
+
+
+숙제 2 
+// 객체(클래스)를 하나 만드는데.. 안에 들어가는 것은 종목코드(symbol)-12자리[영문4자리+숫자8자리], 종목명(name), 종목코드단축형(stockCode)-6자리[숫자6자리], 
+//업종명(unjong), 거래소구분[코스닥/코스피](exchange), 현재가(close), 상한가(upLimit), 하한가(downLimit), 외국인 보유비율(foreignRate) 이 변수로 있을 때...
+//이 객체를 이용하여 10개정도 임의의 종목값을 변수에 맞게 넣은 후 종목별로 종목코드를 키값으로 하여 맵에 담고.,..
+//거래소구분값을 다섯개 정도를 코스피, 나머지 5개 정도를 코스닥으로 주어서 그에 맞는 값들을 나누어 다른 맵에 담는다.
+//그리고 그 담은 객체들을 다시 풀어서 출력하는데  코스피, 코스닥으로 나누어서 출력되도록 해보시오
+
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
+
+public class Main {
+//	public static String getRandomInt(int n) {
+//		Random ran = new Random();
+//		int [] nums = new int [n];
+//		
+//		for (int i = 0; i < n; i++)
+//		{
+//			nums[i] = ran.nextInt(10);
+//		}		
+//		return nums.toString();
+//	}
+//	
+//	public static String getRandomChar() {
+//		Random ran = new Random();
+//		char[] chars = new char [4];
+//		
+//		for (int i = 0; i < 3; i++) {
+//			chars[i] = ((char) ((int) (ran.nextInt(26)) + 65));
+//			
+//		}
+//			return chars.toString();
+//	}
+//	
+//	public static String newSymbol() {
+//		String symbol;
+//		Random ran = new Random();		
+//	
+//		symbol = getRandomChar() + getRandomInt(8);
+//		return symbol;
+//	}
+//		
+//	public static int newCode() {
+//		int code = Integer.parseInt(getRandomInt(6));
+//		return code;
+//	} 안 됨 안 됨..
 	
-}
+	public static void main(String[] args) {
+		
+		HashMap<String, Map <String, stockInfo>> outerMap = new HashMap<>();
+		HashMap<String, stockInfo> kospi = new HashMap<>();
+		HashMap<String, stockInfo> kosdaq = new HashMap<>();
+		HashMap<String, stockInfo> info = new HashMap<>();
+		
+		stockInfo lg = new stockInfo("akew23428909", "lg", 265458, "전자","코스피",  21000, 35000, 19000, 0.3476);
+		stockInfo apple = new stockInfo("ahre87658909", "apple", 265458, "전자","코스피",  51000, 35000, 19000, 0.456);
+		stockInfo samsung = new stockInfo("aiuy98658909", "samsung", 265458, "전자","코스피",  21000, 35000, 19000, 0.346);
+		stockInfo sony = new stockInfo("ekew56548909", "sony", 265458, "전자","코스피",  345000, 35000, 19000, 0.766);
+		stockInfo alto = new stockInfo("ekew54238909", "alto", 265458, "음악","코스피",  534000, 35000, 19000, 0.0276);
+		stockInfo beta = new stockInfo("mkew94528909", " beta", 265458, "음악","코스닥",  14000, 35000, 19000, 0.445);
+		stockInfo star = new stockInfo("mkew12338909", "star", 265458, "음악","코스닥",  54000, 35000, 19000, 0.234);
+		stockInfo triple = new stockInfo("fkew98458909", "triple", 265458, "음식","코스닥",  11000, 35000, 19000, 0.5);
+		stockInfo pizzahut = new stockInfo("fkew72342909", "pizzahut", 265458, "음식","코스닥",  8000, 35000, 19000, 0.014);
+		stockInfo mister = new stockInfo("fkew12328909", "mister", 265458, "음식","코스닥", 61000, 35000, 19000, 0.343);
+//		System.out.println(getRandomChar());
+		
+		info.put("akew23428909", lg);
+		info.put("ahre87658909", apple);
+		info.put("aiuy98658909", samsung);
+		info.put("ekew56548909", sony);
+		info.put("ekew54238909", alto);
+		info.put("mkew94528909",  beta);
+		info.put("mkew12338909", star);
+		info.put("fkew98458909", triple);
+		info.put("fkew72342909", pizzahut);
+		info.put("fkew12328909", mister);
+			
+		for (String i: info.keySet()) {			
+				if ( ((stockInfo) info.get(i)).getStockType() == "코스피") {
+					kospi.put(i, (stockInfo) info.get(i));			
+				} 
+				else  {
+					kosdaq.put(i, (stockInfo) info.get(i));				
+				}
+		}
+
+		outerMap.put("코스피", kospi);
+		outerMap.put("코스닥", kosdaq);
+
+		Set<Entry<String, stockInfo>> entries = kospi.entrySet();
+		Set<Entry<String, stockInfo>> entries2 = kosdaq.entrySet();
+		
+		for (String i:outerMap.keySet()) {
+			System.out.println(i);
+			if (i == "코스피") {
+			for (Entry<String, stockInfo> entry: entries) {
+				System.out.println( entry.getKey() + ": " + entry.getValue());
+				
+			}}
+			else {
+				for (Entry<String, stockInfo> entry: entries2) {
+					System.out.println((entry.getKey() + ": " + entry.getValue()));
+				}
+			}
+		}		
+}}
+	출력결과
+코스닥
+mkew94528909: stockInfo [symbol=mkew94528909, name= beta, stockCode=265458, upjong=음악, stockType=코스닥, close=14000, upLimit=35000, downLimit=19000, foreignRate=0.445]
+fkew72342909: stockInfo [symbol=fkew72342909, name=pizzahut, stockCode=265458, upjong=음식, stockType=코스닥, close=8000, upLimit=35000, downLimit=19000, foreignRate=0.014]
+fkew98458909: stockInfo [symbol=fkew98458909, name=triple, stockCode=265458, upjong=음식, stockType=코스닥, close=11000, upLimit=35000, downLimit=19000, foreignRate=0.5]
+fkew12328909: stockInfo [symbol=fkew12328909, name=mister, stockCode=265458, upjong=음식, stockType=코스닥, close=61000, upLimit=35000, downLimit=19000, foreignRate=0.343]
+mkew12338909: stockInfo [symbol=mkew12338909, name=star, stockCode=265458, upjong=음악, stockType=코스닥, close=54000, upLimit=35000, downLimit=19000, foreignRate=0.234]
+코스피
+ekew54238909: stockInfo [symbol=ekew54238909, name=alto, stockCode=265458, upjong=음악, stockType=코스피, close=534000, upLimit=35000, downLimit=19000, foreignRate=0.0276]
+aiuy98658909: stockInfo [symbol=aiuy98658909, name=samsung, stockCode=265458, upjong=전자, stockType=코스피, close=21000, upLimit=35000, downLimit=19000, foreignRate=0.346]
+akew23428909: stockInfo [symbol=akew23428909, name=lg, stockCode=265458, upjong=전자, stockType=코스피, close=21000, upLimit=35000, downLimit=19000, foreignRate=0.3476]
+ahre87658909: stockInfo [symbol=ahre87658909, name=apple, stockCode=265458, upjong=전자, stockType=코스피, close=51000, upLimit=35000, downLimit=19000, foreignRate=0.456]
+ekew56548909: stockInfo [symbol=ekew56548909, name=sony, stockCode=265458, upjong=전자, stockType=코스피, close=345000, upLimit=35000, downLimit=19000, foreignRate=0.766]
+
+
