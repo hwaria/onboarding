@@ -1,0 +1,119 @@
+package com.moneta.test.web.controller;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class TestController403 {
+	
+	@RequestMapping("/main3")
+	public String method(Model model) {
+		File file = new File("C:\\Users\\이정화\\Documents\\workspace-sts-3.9.8.RELEASE\\pjcf2_sample_web401\\src\\main\\resources\\pjcf\\cryptoList.txt");
+		
+		try {
+			FileReader filereader = new FileReader(file);
+			BufferedReader bufReader = new BufferedReader((filereader));
+			String line ="";
+			List<HashMap<String, Object>> contents = new ArrayList();
+			
+			while ((line = bufReader.readLine()) != null) {
+				String[] content = line.split("\\|" , -1);
+				Map <String, Object> map = new HashMap();
+				map.put("no", content[0]);
+				map.put("name", content[1]);
+				map.put("link", content[2]);
+				map.put("date", content[3]);
+				map.put("view",content[4]);
+				map.put("gubun",content[5]);
+				contents.add((HashMap) map);
+				System.out.println(contents.toString());
+			
+			}
+			model.addAttribute("contents", contents);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+		return "test/board";
+	}
+	
+	@RequestMapping("/test/content")
+	public String method2 (String page, Model model) {
+		System.out.println(page);
+		File file2 = new File("C:\\Users\\이정화\\Documents\\workspace-sts-3.9.8.RELEASE\\pjcf2_sample_web401\\src\\main\\resources\\pjcf\\cryptoList.txt");
+		List<String> lines = new ArrayList();
+		String line ="";
+		try {
+			FileReader filereader2 = new FileReader(file2);
+			BufferedReader bufReader2 = new BufferedReader((filereader2));
+					
+						
+			while ((line = bufReader2.readLine()) != null) {
+				String[] content = line.split("\\|", -1);
+				if (page.equals(content[0])) {
+						line = line.replace(content[4], Integer.toString((Integer.parseInt(content[4]) + 1)));
+						lines.add(line);
+				}
+				else {
+					lines.add(line);
+				}
+			
+			}
+			filereader2.close();
+			bufReader2.close();
+			
+			System.out.println(lines.toString());
+			
+			FileWriter fos = new FileWriter("C:\\Users\\이정화\\Documents\\workspace-sts-3.9.8.RELEASE\\pjcf2_sample_web401\\src\\main\\resources\\pjcf\\cryptoList.txt");
+			BufferedWriter bw = new BufferedWriter(fos);
+			for(String line2: lines) {
+			bw.write(line2 + "\r");
+//			System.out.println("second" + line);
+			}
+			bw.flush();
+			bw.close();
+	
+		
+			File vfile = new File("C:\\Users\\이정화\\Documents\\workspace-sts-3.9.8.RELEASE\\pjcf2_sample_web401\\src\\main\\resources\\pjcf\\cryptoView.txt");
+			FileReader vfilereader = new FileReader(vfile);
+			BufferedReader vbufReader = new BufferedReader(vfilereader);
+			String vline ="";
+			List<HashMap<String, Object>> vcontents = new ArrayList();
+			while ((vline = vbufReader.readLine()) != null) {
+				String[] content = vline.split("\\|", -1);
+				for (String no : content) {
+					if(page.equals(no)) {
+						Map <String, Object> map = new HashMap();
+						map.put("no", content[0]);
+						map.put("con", content[1]);
+						map.put("writer",content[2]);
+						model.addAttribute("map", map);
+					}
+				}
+				
+			}				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return "test/content";
+	}
+	
+}
